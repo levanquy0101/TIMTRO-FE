@@ -4,6 +4,8 @@ import TheExistRoom from '../../components/Section/TheExistRoom';
 import Supplement from '../../components/Section/Supplement';
 import TipsToStay from '../../components/Section/TipsToStay';
 import BannerHomeSilder from '../../components/Section/BannerHomeSilder';
+import FooterHome from '../../components/Footer/FooterHome';
+import AboutUs from '../../components/Section/AboutUs';
 
 function HomePage(props) {
     return (
@@ -14,7 +16,9 @@ function HomePage(props) {
                 <TheExistRoom />
                 <Supplement />
                 <TipsToStay />
+                <AboutUs />
             </main>
+            <FooterHome />
         </>
     );
 }
