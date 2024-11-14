@@ -11,7 +11,7 @@ function HomePage(props) {
     return (
         <>
             <HeaderHome />
-            <main className='px-12'>
+            <main className='px-12 flex flex-col gap-6'>
                 <BannerHomeSilder />
                 <TheExistRoom />
                 <Supplement />

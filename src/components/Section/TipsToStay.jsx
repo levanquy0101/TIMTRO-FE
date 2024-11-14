@@ -2,7 +2,7 @@ import React from 'react';
 
 const TipsToStay = () => {
     return (
-        <section className='flex py-16'>
+        <section className='flex py-20'>
             <div className='w-1/2  dot-pattern'>
                 <div className='p-14'>
                     <h3 className='text-5xl uppercase'>Mẹo vặt ở <span className='text-primary'>trọ</span> </h3>

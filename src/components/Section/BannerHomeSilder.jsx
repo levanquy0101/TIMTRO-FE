@@ -15,6 +15,9 @@ const BannerHomeSilder = () => {
         'https://picsum.photos/600/400?random=3',
         'https://picsum.photos/600/400?random=4',
         'https://picsum.photos/600/400?random=5',
+        'https://picsum.photos/600/400?random=6',
+        'https://picsum.photos/600/400?random=7',
+        'https://picsum.photos/600/400?random=8',
     ];
     return (
         <section className='p-8 bg-main-home rounded-xl'>
