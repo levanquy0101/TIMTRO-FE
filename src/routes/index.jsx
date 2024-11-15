@@ -3,6 +3,8 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import HomePage from "../pages/Home/HomePage";
 import LoginPage from "../pages/Login/LoginPage";
 import NotFound from "../pages/NotFound/NotFound";
+import PostPage from "../pages/Post/PostPage";
+import RoomPage from "../pages/Room/RoomPage";
 
 const routes = [
   {
@@ -13,6 +15,14 @@ const routes = [
   {
     path: '/login',
     element: <LoginPage />,
+  },
+  {
+    path: '/room',
+    element: <RoomPage />,
+  },
+  {
+    path: '/post',
+    element: <PostPage />,
   },
   {
     path: '/dashboard',
