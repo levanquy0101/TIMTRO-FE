@@ -7,7 +7,7 @@ import icon3 from "../../assets/images/aboutus_icon3.png";
 const AboutUs = () => {
   return (
     <section className="flex p-4 my-20">
-      <img className="p-12" src={aboutUs} alt="" />
+      <img className="p-12 w-1/2" src={aboutUs} alt="" />
       <div className="p-12">
         <h3 className="uppercase text-zinc-400 font-normal text-base">
           About Us

@@ -13,7 +13,7 @@ import supBanner5 from "../../assets/images/sup5-banner.jpg";
 const BannerHomeSilder = () => {
   const images = [supBanner1, supBanner2, supBanner3, supBanner4, supBanner5];
   return (
-    <section className="p-8 bg-main-home rounded-xl">
+    <section className="relative p-8 bg-main-home rounded-xl h-[80vh]">
       <div className="flex gap-8">
         <div className="w-3/5">
           <h1 className="text-6xl text-primary">Phòng Đặc Biệt</h1>
@@ -36,7 +36,7 @@ const BannerHomeSilder = () => {
           <ImageSlider images={images} />
         </div>
       </div>
-      <div className="p-6 bg-white -mb-28 mt-16 shadow-black rounded-xl shadow-2xl">
+      <div className="absolute left-8 right-8 -bottom-[8vh] p-6 bg-white shadow-black rounded-xl shadow-2xl">
         <ul className="flex gap-2 font-medium uppercase py-2 overflow-x-auto">
           <li className="flex items-center gap-2 flex-1 whitespace-nowrap px-4 min-w-96">
             <IoLocation size={24} /> Khu vực/ Địa điểm
