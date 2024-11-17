@@ -33,7 +33,19 @@ a {
 .css-hlgwow{
   padding: 0 !important;
 }
+// Chỉnh sửa thư viện slick
 
+.slick-prev{
+  left: 10px !important;
+  z-index: 100;
+}
+.slick-next {
+  right: 10px !important;
+}
+.css-19bb58m{
+  margin: 0 !important;
+}
+/// 
 ///////////// Class thêm cho Tailwind ///////////////
 .text-shadow {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);

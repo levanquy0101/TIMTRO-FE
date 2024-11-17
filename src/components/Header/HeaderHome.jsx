@@ -32,10 +32,10 @@ const HeaderHome = () => {
             {
               location.pathname === '/' && <>
                 <li>
-                  <Link>Trang Chủ</Link>
+                  <Link to="/">Trang Chủ</Link>
                 </li>
                 <li>
-                  <Link>Phòng</Link>
+                  <Link to="/room">Phòng</Link>
                 </li>
                 <li>
                   <Link>Tiện Ích</Link>

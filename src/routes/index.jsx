@@ -4,6 +4,7 @@ import HomePage from "../pages/Home/HomePage";
 import LoginPage from "../pages/Login/LoginPage";
 import NotFound from "../pages/NotFound/NotFound";
 import PostPage from "../pages/Post/PostPage";
+import RoomDetailPage from "../pages/Room/RoomDetailPage";
 import RoomPage from "../pages/Room/RoomPage";
 
 const routes = [
@@ -19,6 +20,10 @@ const routes = [
   {
     path: '/room',
     element: <RoomPage />,
+  },
+  {
+    path: '/room/:code',
+    element: <RoomDetailPage />,
   },
   {
     path: '/post',
