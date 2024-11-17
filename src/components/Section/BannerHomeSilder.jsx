@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import iconSearch from "../../assets/icons/search.svg";
 import { IoLocation } from "react-icons/io5";
 import { RiPriceTagFill } from "react-icons/ri";
@@ -9,6 +9,7 @@ import supBanner2 from "../../assets/images/sup2-banner.png";
 import supBanner3 from "../../assets/images/sup3-banner.jpg";
 import supBanner4 from "../../assets/images/sup4-banner.jpg";
 import supBanner5 from "../../assets/images/sup5-banner.jpg";
+import downpageIcon from "../../assets/icons/downpage-icon.svg";
 import { getAllDistrict, getAllProvince } from "../../services/api/SuperShipService";
 import { useQuery } from "react-query";
 import Select from 'react-select';
@@ -83,11 +84,16 @@ const BannerHomeSilder = () => {
       color: '#888', // Thay đổi màu chữ của placeholder
     }),
   };
-
+  const handleToTop = () => {
+    const element = document.getElementById("topElement");
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
 
   return (
-    <section className="relative p-8 bg-main-home rounded-xl h-[80vh]">
+    <section className="relative p-8 bg-main-home rounded-xl h-[76vh]">
       <div className="flex gap-8">
         <div className="w-3/5">
           <h1 className="text-6xl text-primary">Phòng Đặc Biệt</h1>
@@ -110,7 +116,7 @@ const BannerHomeSilder = () => {
           <ImageSlider images={images} />
         </div>
       </div>
-      <div className="absolute left-8 right-8 -bottom-[8vh] p-6 bg-white shadow-black rounded-xl shadow-2xl">
+      <div className="absolute left-8 right-8 -bottom-[8vh] py-1 px-6 bg-white shadow-black rounded-xl shadow-2xl">
         <ul className="flex font-medium uppercase py-2 overflow-x-auto">
           <li className="flex items-center gap-2 flex-1 whitespace-nowrap px-4 min-w-96">
             <IoLocation size={24} /> Khu vực/ Địa điểm
@@ -178,6 +184,9 @@ const BannerHomeSilder = () => {
           <button className="px-5 flex justify-center items-center text-white bg-primary rounded border-none cursor-pointer">
             <img src={iconSearch} alt="" />
           </button>
+        </div>
+        <div className="flex justify-center">
+          <img onClick={handleToTop} src={downpageIcon} className="max-w-12 -mb-[2.5rem] cursor-pointer" alt="Scroll to top" />
         </div>
       </div>
     </section>

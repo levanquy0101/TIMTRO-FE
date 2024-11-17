@@ -28,8 +28,6 @@ function PostPage(props) {
                     <p className='my-4'>Ngoài ra, bạn có thể cần phải kiểm tra tín dụng để tìm hiểu điểm tín dụng của chúng tôi, điều này có thể ảnh hưởng đến hợp đồng thuê. Hầu hết chủ nhà thích cho những người có điểm tín dụng cao thuê nhà và điều này có thể là cơ sở về lịch sử tài chính của bạn. Trước khi ký hợp đồng thuê nhà, hãy đảm bảo rằng bạn có đủ tiền để chi trả cho các chi phí nêu trên. Đừng bao giờ quên rằng mình cần phải thành thật trong tài chính của mình với đội ngũ chuyên gia cho thuê để đảm bảo căn hộ của bạn có thể bắt đầu tìm nơi thoải mái và chuyển sang giai đoạn tiếp theo của quá trình tìm kiếm căn hộ.</p>
                 </div>
 
-
-
             </main>
             <FooterHome />
 
