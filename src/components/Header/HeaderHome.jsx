@@ -29,25 +29,22 @@ const HeaderHome = () => {
             </h1>
           </Link>
           <ul className="flex gap-8 items-center">
-            {
-              location.pathname === '/' && <>
-                <li>
-                  <Link to="/">Trang Chủ</Link>
-                </li>
-                <li>
-                  <Link to="/room">Phòng</Link>
-                </li>
-                <li>
-                  <Link>Tiện Ích</Link>
-                </li>
-                <li>
-                  <Link>Mẹo</Link>
-                </li>
-                <li>
-                  <Link>Về Chúng Tôi</Link>
-                </li>
-              </>
-            }
+            <li>
+              <Link to="/">Trang Chủ</Link>
+            </li>
+            <li>
+              <Link to="/room">Phòng</Link>
+            </li>
+            <li>
+              <Link>Tiện Ích</Link>
+            </li>
+            <li>
+              <Link>Mẹo</Link>
+            </li>
+            <li>
+              <Link>Về Chúng Tôi</Link>
+            </li>
+
             <li className="rounded-md border border-primary border-solid px-2 py-1.5 text-primary">
               <button
                 onClick={handleRegister}

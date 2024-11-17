@@ -107,16 +107,6 @@ const Room = () => {
                             <button className='w-full text-base  cursor-pointer mt-2 p-1 rounded text-primary border-[2px] border-solid border-primary hover:bg-primary hover:text-white  '>Đặt phòng</button>
                         </figcaption>
                     </div>
-                    <div className='bg-[#e8e8e8] rounded-lg min-w-64 w-full'>
-                        <Link to="/room/code"><img className='rounded-lg aspect-[13/10] w-full' src={item} alt="" /></Link>
-                        <figcaption className='p-2'>
-                            <strong className='block'>3.000.000vnd/tháng</strong>
-                            <p className='my-2'>AnThuong09 Apartment</p>
-                            <p className='my-2'>09 An thượng 1 - Ngũ Hành Sơn</p>
-                            <p className='my-2'>1 bed - bath</p>
-                            <button className='w-full text-base  cursor-pointer mt-2 p-1 rounded text-primary border-[2px] border-solid border-primary hover:bg-primary hover:text-white  '>Đặt phòng</button>
-                        </figcaption>
-                    </div>
 
                 </div>
                 <div className='w-full flex gap-4 text-primary justify-center mt-8'>
