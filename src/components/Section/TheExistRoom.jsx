@@ -32,7 +32,7 @@ const TheExistRoom = () => {
     };
     return (
         <section id="topElement" className='mt-36'>
-            <h1 className='text-center uppercase my-4 text-4xl'>Phòng hiện có</h1>
+            <h1 className='text-center uppercase my-4 text-4xl pt-4'>Phòng hiện có</h1>
             <p className='text-center'>Các phòng đa dạng với sức chứa khác nhau.</p>
             <div className='relative'>
                 <div ref={containerRef} className='flex scroll-hidden gap-4 justify-between my-16'>

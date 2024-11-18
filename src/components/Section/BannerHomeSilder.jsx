@@ -130,7 +130,7 @@ const BannerHomeSilder = () => {
         </ul>
         <hr />
         <div className="flex py-4 gap-2 overflow-x-auto">
-          <div className="bg-[#e1e1e1] flex flex-1 px-3 py-2 rounded gap-4 min-w-96">
+          <div className="bg-[#e1e1e1] flex flex-1 px-3 pt-2 rounded gap-4 min-w-96">
             <label className="flex flex-col w-full" htmlFor="">
               <span className="text-zinc-600">Chọn tỉnh thành </span>
               <Select

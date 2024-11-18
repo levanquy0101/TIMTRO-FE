@@ -9,17 +9,13 @@ import AboutUs from '../../components/Section/AboutUs';
 
 function HomePage(props) {
     return (
-        <>
-            <HeaderHome />
-            <main className='px-12 flex flex-col gap-6'>
-                <BannerHomeSilder />
-                <TheExistRoom />
-                <Supplement />
-                <TipsToStay />
-                <AboutUs />
-            </main>
-            <FooterHome />
-        </>
+        <div className='px-12'>
+            <BannerHomeSilder />
+            <TheExistRoom />
+            <Supplement />
+            <TipsToStay />
+            <AboutUs />
+        </div>
     );
 }
 

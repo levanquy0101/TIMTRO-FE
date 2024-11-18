@@ -5,7 +5,7 @@ import item4 from "../../assets/images/repair-icon.png";
 
 const Supplement = () => {
   return (
-    <section className="my-8">
+    <section className="">
       <h2 className="text-center uppercase my-4 text-4xl">Tiện ích đi kèm</h2>
       <p className="text-center my-6">
         Chúng tôi cung cấp nhiều tiện ích khác nhau bạn có thể sử dụng một cách

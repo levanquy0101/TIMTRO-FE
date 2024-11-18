@@ -12,7 +12,7 @@ import item9 from '../../assets/icons/washing-icon.svg'
 
 const RoomDetail = () => {
     return (
-        <section className='px-16 py-4'>
+        <section className='px-12'>
             <div className='relative flex gap-4'>
                 <div>
                     <strong className='text-3xl block'>3.000.000 vnd/tháng</strong>

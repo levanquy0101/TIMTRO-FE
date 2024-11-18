@@ -1,53 +1,43 @@
 
 import MyAccountPage from "../pages/Account/MyAccountPage";
-import Dashboard from "../pages/Dashboard/Dashboard";
 import HomePage from "../pages/Home/HomePage";
 import LoginPage from "../pages/Login/LoginPage";
-import NotFound from "../pages/NotFound/NotFound";
 import PostPage from "../pages/Post/PostPage";
 import RoomDetailPage from "../pages/Room/RoomDetailPage";
 import RoomPage from "../pages/Room/RoomPage";
 import CleaningServicePage from "../pages/Service/CleaningServicePage";
 
-const routes = [
+export const homeRoutes = [
   {
     path: '/',
-    element: <HomePage />,
+    component: <HomePage />,
     exact: true,
   },
   {
     path: '/login',
-    element: <LoginPage />,
+    component: <LoginPage />,
   },
   {
     path: '/room',
-    element: <RoomPage />,
+    component: <RoomPage />,
   },
   {
     path: '/room/:code',
-    element: <RoomDetailPage />,
+    component: <RoomDetailPage />,
   },
   {
     path: '/post',
-    element: <PostPage />,
+    component: <PostPage />,
   },
   {
     path: '/clean',
-    element: <CleaningServicePage />,
+    component: <CleaningServicePage />,
   },
   {
     path: '/my-account',
-    element: <MyAccountPage />,
-  },
-  {
-    path: '/dashboard',
-    element: <Dashboard />,
-    private: true,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
+    component: <MyAccountPage />,
   },
 ];
 
-export default routes;
+
+export const dashboardRoutes = [];

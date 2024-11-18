@@ -1,8 +1,7 @@
-import React from 'react';
-import HeaderHome from '../../components/Header/HeaderHome';
-import FooterHome from '../../components/Footer/FooterHome';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import RoomDetail from '../../components/Section/RoomDetail';
+import bgPlaceholder from '../../assets/images/background-xam.jpg';
 
 function RoomDetailPage(props) {
     // Mảng các đường dẫn ảnh
@@ -15,29 +14,31 @@ function RoomDetailPage(props) {
     ];
 
     const settings = {
-        // dots: true,  // Hiển thị dots
-        infinite: true,  // Vòng lặp vô tận
-        speed: 500,  // Tốc độ chuyển slide
-        slidesToShow: 3,  // Số ảnh hiển thị cùng lúc
-        slidesToScroll: 1,  // Số ảnh cuộn mỗi lần
-      
-       
+        infinite: true, // Vòng lặp vô tận
+        speed: 500, // Tốc độ chuyển slide
+        slidesToShow: 3, // Số ảnh hiển thị cùng lúc
+        slidesToScroll: 1, // Số ảnh cuộn mỗi lần
     };
 
     return (
         <>
-            <HeaderHome />
-            <main className='overflow-hidden'>
-                <Slider {...settings}>
-                    {imageUrls.map((url, index) => (
-                        <div key={index} className='w-max'>
-                            <img src={url} alt={`Slide ${index + 1}`} className="w-full h-auto px-1" />
+            <Slider {...settings}>
+                {imageUrls.map((url, index) => {
+                    const [isLoaded, setIsLoaded] = useState(false);
+
+                    return (
+                        <div key={index} className="w-max">
+                            <img
+                                src={isLoaded ? url : bgPlaceholder} // Hiển thị ảnh hoặc placeholder
+                                alt={`Slide ${index + 1}`}
+                                onLoad={() => setIsLoaded(true)} // Đổi trạng thái khi ảnh tải xong
+                                className="w-full h-auto px-1 aspect-[3/2]"
+                            />
                         </div>
-                    ))}
-                </Slider>
-                <RoomDetail />
-            </main>
-            <FooterHome />
+                    );
+                })}
+            </Slider>
+            <RoomDetail />
         </>
     );
 }
