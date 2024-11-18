@@ -3,11 +3,11 @@ import {toast} from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const axiosClient = axios.create({
+const axiosAuth = axios.create({
   baseURL: `${apiUrl}/api/auth`,
 });
 
-axiosClient.interceptors.request.use(
+axiosAuth.interceptors.request.use(
   (config) => {
     const user = JSON.parse(localStorage.getItem('user'));
     const accessToken = user ? user.token : null;
@@ -20,7 +20,7 @@ axiosClient.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-axiosClient.interceptors.response.use(
+axiosAuth.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -39,4 +39,4 @@ axiosClient.interceptors.response.use(
   }
 );
 
-export default axiosClient;
+export default axiosAuth;

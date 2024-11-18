@@ -13,11 +13,14 @@ import downpageIcon from "../../assets/icons/downpage-icon.svg";
 import { getAllDistrict, getAllProvince } from "../../services/api/SuperShipService";
 import { useQuery } from "react-query";
 import Select from 'react-select';
+import { useForm } from 'react-hook-form';
+import { RoomService } from "../../services/api";
 
 const BannerHomeSilder = () => {
   const images = [supBanner1, supBanner2, supBanner3, supBanner4, supBanner5];
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const { data: provinces } = useQuery({
     queryKey: ['provinces'],
     queryFn: () => getAllProvince(),
@@ -30,9 +33,7 @@ const BannerHomeSilder = () => {
       enabled: !!selectedProvince,
     }
   );
-  console.log(districts)
-  console.log(selectedProvince?.code)
-
+  
   const handleProvinceChange = (selectedOption) => {
     setSelectedProvince(selectedOption);
     setSelectedDistrict(null);
@@ -91,6 +92,17 @@ const BannerHomeSilder = () => {
     }
   };
 
+  const onSubmit = async (data) => {
+    try {
+      data.province_id = selectedProvince?.code || "";
+      data.district_id = selectedDistrict?.code || "";
+      const response = await RoomService.getAll(data)
+      console.log(response);
+    } catch (error) {
+      
+    }
+    
+  };
 
   return (
     <section className="relative p-8 bg-main-home rounded-xl h-[76vh]">
@@ -129,7 +141,7 @@ const BannerHomeSilder = () => {
           </li>
         </ul>
         <hr />
-        <div className="flex py-4 gap-2 overflow-x-auto">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex py-4 gap-2 overflow-x-auto">
           <div className="bg-[#e1e1e1] flex flex-1 px-3 pt-2 rounded gap-4 min-w-96">
             <label className="flex flex-col w-full" htmlFor="">
               <span className="text-zinc-600">Chọn tỉnh thành </span>
@@ -168,6 +180,7 @@ const BannerHomeSilder = () => {
             <input
               className="p-1 outline-none border-none bg-[#e1e1e1] leading-7 text-base"
               type="text"
+              {...register('price_from',)}
             />
           </label>
           <i className="border-r-[0px] border-solid border-zinc-400 h-12 my-auto"></i>
@@ -179,12 +192,13 @@ const BannerHomeSilder = () => {
             <input
               className="p-1 outline-none border-none bg-[#e1e1e1] leading-7 text-base"
               type="text"
+              {...register('max_occupants',)}
             />
           </label>
           <button className="px-5 flex justify-center items-center text-white bg-primary rounded border-none cursor-pointer">
             <img src={iconSearch} alt="" />
           </button>
-        </div>
+        </form>
         <div className="flex justify-center">
           <img onClick={handleToTop} src={downpageIcon} className="max-w-12 -mb-[2.5rem] cursor-pointer" alt="Scroll to top" />
         </div>
