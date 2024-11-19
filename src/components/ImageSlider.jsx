@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import React, { useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const ImageSlider = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
   return (
