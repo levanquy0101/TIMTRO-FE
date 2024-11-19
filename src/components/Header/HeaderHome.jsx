@@ -36,13 +36,13 @@ const HeaderHome = () => {
               <Link to="/room">Phòng</Link>
             </li>
             <li>
-              <Link>Tiện Ích</Link>
+              <Link to="/utils">Tiện Ích</Link>
             </li>
             <li>
               <Link>Mẹo</Link>
             </li>
             <li>
-              <Link>Về Chúng Tôi</Link>
+              <Link to="/about">Về Chúng Tôi</Link>
             </li>
 
             <li className="rounded-md border border-primary border-solid px-2 py-1.5 text-primary">

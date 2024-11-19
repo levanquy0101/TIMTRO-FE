@@ -6,6 +6,8 @@ import PostPage from "../pages/Post/PostPage";
 import RoomDetailPage from "../pages/Room/RoomDetailPage";
 import RoomPage from "../pages/Room/RoomPage";
 import CleaningServicePage from "../pages/Service/CleaningServicePage";
+import UtilitiesPage from "../pages/Utils/UtilitiesPage";
+import AboutPage from "../pages/About/AboutPage";
 
 export const homeRoutes = [
   {
@@ -30,7 +32,15 @@ export const homeRoutes = [
     component: <PostPage />,
   },
   {
-    path: '/clean',
+    path: '/about',
+    component: <AboutPage />,
+  },
+  {
+    path: '/utils',
+    component: <UtilitiesPage />,
+  },
+  {
+    path: '/service-clean',
     component: <CleaningServicePage />,
   },
   {
