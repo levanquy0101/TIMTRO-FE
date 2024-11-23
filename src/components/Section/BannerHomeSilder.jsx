@@ -16,6 +16,7 @@ import Select from 'react-select';
 import { useForm } from 'react-hook-form';
 import { RoomService } from "../../services/api";
 import { Element } from "react-scroll";
+import { useNavigate } from "react-router-dom";
 
 
 const BannerHomeSilder = () => {
@@ -23,6 +24,7 @@ const BannerHomeSilder = () => {
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
   const { data: provinces } = useQuery({
     queryKey: ['provinces'],
     queryFn: () => getAllProvince(),
@@ -100,6 +102,7 @@ const BannerHomeSilder = () => {
       data.district_id = selectedDistrict?.code || "";
       const response = await RoomService.getAll(data)
       console.log(response);
+      navigate("/rooms", { state: response });
     } catch (error) {
 
     }

@@ -20,7 +20,7 @@ export const homeRoutes = [
     component: <LoginPage />,
   },
   {
-    path: '/room',
+    path: '/rooms',
     component: <RoomPage />,
   },
   {

@@ -30,21 +30,26 @@ const HeaderHome = () => {
             </h1>
           </LinkRouter>
           <ul className="flex gap-8 items-center">
-            <li>
-              <Link to="home" smooth={true} offset={-86} className="cursor-pointer">Trang Chủ</Link>
-            </li>
-            <li>
-              <Link to="the-exist-room" smooth={true} className="cursor-pointer">Phòng</Link>
-            </li>
-            <li>
-              <Link to="utils" smooth={true} className="cursor-pointer">Tiện Ích</Link>
-            </li>
-            <li>
-              <Link to="tips" smooth={true} className="cursor-pointer">Mẹo</Link>
-            </li>
-            <li>
-              <Link to="about-us" smooth={true} className="cursor-pointer">Về Chúng Tôi</Link>
-            </li>
+            {
+              location.pathname === '/' &&
+              <>
+                <li>
+                  <Link to="home" smooth={true} offset={-86} className="cursor-pointer">Trang Chủ</Link>
+                </li>
+                <li>
+                  <Link to="the-exist-room" smooth={true} className="cursor-pointer">Phòng</Link>
+                </li>
+                <li>
+                  <Link to="utils" smooth={true} className="cursor-pointer">Tiện Ích</Link>
+                </li>
+                <li>
+                  <Link to="tips" smooth={true} className="cursor-pointer">Mẹo</Link>
+                </li>
+                <li>
+                  <Link to="about-us" smooth={true} className="cursor-pointer">Về Chúng Tôi</Link>
+                </li>
+              </>
+            }
 
             <li className="rounded-md border border-primary border-solid px-2 py-1.5 text-primary">
               <button
