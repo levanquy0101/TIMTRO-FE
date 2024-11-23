@@ -15,6 +15,8 @@ import { useQuery } from "react-query";
 import Select from 'react-select';
 import { useForm } from 'react-hook-form';
 import { RoomService } from "../../services/api";
+import { Element } from "react-scroll";
+
 
 const BannerHomeSilder = () => {
   const images = [supBanner1, supBanner2, supBanner3, supBanner4, supBanner5];
@@ -33,7 +35,7 @@ const BannerHomeSilder = () => {
       enabled: !!selectedProvince,
     }
   );
-  
+
   const handleProvinceChange = (selectedOption) => {
     setSelectedProvince(selectedOption);
     setSelectedDistrict(null);
@@ -99,111 +101,113 @@ const BannerHomeSilder = () => {
       const response = await RoomService.getAll(data)
       console.log(response);
     } catch (error) {
-      
+
     }
-    
+
   };
 
   return (
-    <section className="relative p-8 bg-main-home rounded-xl h-[76vh]">
-      <div className="flex gap-8">
-        <div className="w-3/5">
-          <h1 className="text-6xl text-primary">Phòng Đặc Biệt</h1>
-          <strong className="block text-white text-3xl leading-normal text-shadow">
-            Giá: 3.000k/tháng
-          </strong>
-          <strong className="block text-white text-3xl leading-normal text-shadow">
-            Địa chỉ: 296 Võ Nguyên Giáp, <br /> Ngũ Hành Sơn, Đà Nẵng
-          </strong>
-          <p className="py-8 text-white text-lg">
-            Phòng được thiết kế với không gian sông rộng rãi và tháng mát xung
-            quanh với nhiều dịch vụ tiện ích khác nhau có tầm nhìn ra biển và
-            ánh sáng tự nhiên vào mỗi buổi sáng.
-          </p>
-          <button className="bg-primary cursor-pointer text-white border-none px-8 py-2 rounded text-lg">
-            Thuê Ngay
-          </button>
-        </div>
-        <div className="w-2/5">
-          <ImageSlider images={images} />
-        </div>
-      </div>
-      <div className="absolute left-8 right-8 -bottom-[8vh] py-1 px-6 bg-white shadow-black rounded-xl shadow-2xl">
-        <ul className="flex font-medium uppercase py-2 overflow-x-auto">
-          <li className="flex items-center gap-2 flex-1 whitespace-nowrap px-4 min-w-96">
-            <IoLocation size={24} /> Khu vực/ Địa điểm
-          </li>
-          <li className="flex items-center gap-2 flex-1 whitespace-nowrap px-4">
-            <RiPriceTagFill size={24} /> Mức giá
-          </li>
-          <li className="flex items-center gap-2 flex-1 whitespace-nowrap px-4">
-            <BsCalendar2CheckFill size={20} /> Số người ở
-          </li>
-        </ul>
-        <hr />
-        <form onSubmit={handleSubmit(onSubmit)} className="flex py-4 gap-2 overflow-x-auto">
-          <div className="bg-[#e1e1e1] flex flex-1 px-3 pt-2 rounded gap-4 min-w-96">
-            <label className="flex flex-col w-full" htmlFor="">
-              <span className="text-zinc-600">Chọn tỉnh thành </span>
-              <Select
-                value={selectedProvince}
-                onChange={handleProvinceChange}
-                options={provinces}
-                styles={customStyles}
-                getOptionLabel={(e) => e.name}
-                getOptionValue={(e) => e.code}
-                menuPortalTarget={document.body}
-                placeholder='Chọn tỉnh thành'
-              />
-            </label>
-            <label className="flex flex-col w-full" htmlFor="">
-              <span className="text-zinc-600">Quận/ Huyện</span>
-              <Select
-                options={districts}
-                value={selectedDistrict}
-                onChange={handleDistrictChange}
-                menuPortalTarget={document.body}
-                styles={customStyles}
-                getOptionLabel={(e) => e.name}
-                getOptionValue={(e) => e.code}
-                placeholder="Chọn quận huyện"
-                isDisabled={!selectedProvince}  // Disable quận huyện nếu chưa chọn tỉnh thành
-              />
-            </label>
+    <Element name="home">
+      <section className="relative p-8 bg-main-home rounded-xl h-[76vh]">
+        <div className="flex gap-8">
+          <div className="w-3/5">
+            <h1 className="text-6xl text-primary">Phòng Đặc Biệt</h1>
+            <strong className="block text-white text-3xl leading-normal text-shadow">
+              Giá: 3.000k/tháng
+            </strong>
+            <strong className="block text-white text-3xl leading-normal text-shadow">
+              Địa chỉ: 296 Võ Nguyên Giáp, <br /> Ngũ Hành Sơn, Đà Nẵng
+            </strong>
+            <p className="py-8 text-white text-lg">
+              Phòng được thiết kế với không gian sông rộng rãi và tháng mát xung
+              quanh với nhiều dịch vụ tiện ích khác nhau có tầm nhìn ra biển và
+              ánh sáng tự nhiên vào mỗi buổi sáng.
+            </p>
+            <button className="bg-primary cursor-pointer text-white border-none px-8 py-2 rounded text-lg">
+              Thuê Ngay
+            </button>
           </div>
-          <i className="border-r-[0px] border-solid border-zinc-400 h-12 my-auto"></i>
-          <label
-            className="flex flex-col flex-1 bg-[#e1e1e1] px-3 py-2 rounded"
-            htmlFor=""
-          >
-            <span className="text-zinc-600">Giá từ</span>
-            <input
-              className="p-1 outline-none border-none bg-[#e1e1e1] leading-7 text-base"
-              type="text"
-              {...register('price_from',)}
-            />
-          </label>
-          <i className="border-r-[0px] border-solid border-zinc-400 h-12 my-auto"></i>
-          <label
-            className="flex flex-col flex-1 bg-[#e1e1e1] px-3 py-2 rounded"
-            htmlFor=""
-          >
-            <span className="text-zinc-600">Số lượng </span>
-            <input
-              className="p-1 outline-none border-none bg-[#e1e1e1] leading-7 text-base"
-              type="text"
-              {...register('max_occupants',)}
-            />
-          </label>
-          <button className="px-5 flex justify-center items-center text-white bg-primary rounded border-none cursor-pointer">
-            <img src={iconSearch} alt="" />
-          </button>
-        </form>
-        <div className="flex justify-center">
-          <img onClick={handleToTop} src={downpageIcon} className="max-w-12 -mb-[2.5rem] cursor-pointer" alt="Scroll to top" />
+          <div className="w-2/5">
+            <ImageSlider images={images} />
+          </div>
         </div>
-      </div>
-    </section>
+        <div className="absolute left-8 right-8 -bottom-[8vh] py-1 px-6 bg-white shadow-black rounded-xl shadow-2xl">
+          <ul className="flex font-medium uppercase py-2 overflow-x-auto">
+            <li className="flex items-center gap-2 flex-1 whitespace-nowrap px-4 min-w-96">
+              <IoLocation size={24} /> Khu vực/ Địa điểm
+            </li>
+            <li className="flex items-center gap-2 flex-1 whitespace-nowrap px-4">
+              <RiPriceTagFill size={24} /> Mức giá
+            </li>
+            <li className="flex items-center gap-2 flex-1 whitespace-nowrap px-4">
+              <BsCalendar2CheckFill size={20} /> Số người ở
+            </li>
+          </ul>
+          <hr />
+          <form onSubmit={handleSubmit(onSubmit)} className="flex py-4 gap-2 overflow-x-auto">
+            <div className="bg-[#e1e1e1] flex flex-1 px-3 pt-2 rounded gap-4 min-w-96">
+              <label className="flex flex-col w-full" htmlFor="">
+                <span className="text-zinc-600">Chọn tỉnh thành </span>
+                <Select
+                  value={selectedProvince}
+                  onChange={handleProvinceChange}
+                  options={provinces}
+                  styles={customStyles}
+                  getOptionLabel={(e) => e.name}
+                  getOptionValue={(e) => e.code}
+                  menuPortalTarget={document.body}
+                  placeholder='Chọn tỉnh thành'
+                />
+              </label>
+              <label className="flex flex-col w-full" htmlFor="">
+                <span className="text-zinc-600">Quận/ Huyện</span>
+                <Select
+                  options={districts}
+                  value={selectedDistrict}
+                  onChange={handleDistrictChange}
+                  menuPortalTarget={document.body}
+                  styles={customStyles}
+                  getOptionLabel={(e) => e.name}
+                  getOptionValue={(e) => e.code}
+                  placeholder="Chọn quận huyện"
+                  isDisabled={!selectedProvince}  // Disable quận huyện nếu chưa chọn tỉnh thành
+                />
+              </label>
+            </div>
+            <i className="border-r-[0px] border-solid border-zinc-400 h-12 my-auto"></i>
+            <label
+              className="flex flex-col flex-1 bg-[#e1e1e1] px-3 py-2 rounded"
+              htmlFor=""
+            >
+              <span className="text-zinc-600">Giá từ</span>
+              <input
+                className="p-1 outline-none border-none bg-[#e1e1e1] leading-7 text-base"
+                type="text"
+                {...register('price_from',)}
+              />
+            </label>
+            <i className="border-r-[0px] border-solid border-zinc-400 h-12 my-auto"></i>
+            <label
+              className="flex flex-col flex-1 bg-[#e1e1e1] px-3 py-2 rounded"
+              htmlFor=""
+            >
+              <span className="text-zinc-600">Số lượng </span>
+              <input
+                className="p-1 outline-none border-none bg-[#e1e1e1] leading-7 text-base"
+                type="text"
+                {...register('max_occupants',)}
+              />
+            </label>
+            <button className="px-5 flex justify-center items-center text-white bg-primary rounded border-none cursor-pointer">
+              <img src={iconSearch} alt="" />
+            </button>
+          </form>
+          <div className="flex justify-center">
+            <img onClick={handleToTop} src={downpageIcon} className="max-w-12 -mb-[2.5rem] cursor-pointer" alt="Scroll to top" />
+          </div>
+        </div>
+      </section>
+    </Element>
   );
 };
 
