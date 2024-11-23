@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link as LinkRouter } from "react-router-dom";
 import ModalMenuSign from "../Modal/ModalMenuSign";
-import { Link, Element } from "react-scroll";
+import { Link } from "react-scroll";
 
 const HeaderHome = () => {
   const [isModalSign, setIsModalSign] = useState(false);
@@ -24,11 +24,11 @@ const HeaderHome = () => {
     <>
       <header className="">
         <nav className="flex w-full justify-between py-6 px-20">
-          <Link to={"/"} className="cursor-pointer">
+          <LinkRouter to={"/"} className="cursor-pointer">
             <h1 className="text-3xl">
               T<span className="text-primary">W</span>S.COM
             </h1>
-          </Link>
+          </LinkRouter>
           <ul className="flex gap-8 items-center">
             <li>
               <Link to="home" smooth={true} offset={-86} className="cursor-pointer">Trang Chủ</Link>
