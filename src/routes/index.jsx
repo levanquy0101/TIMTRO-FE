@@ -24,7 +24,7 @@ export const homeRoutes = [
     component: <RoomPage />,
   },
   {
-    path: '/room/:code',
+    path: '/room/:id',
     component: <RoomDetailPage />,
   },
   {

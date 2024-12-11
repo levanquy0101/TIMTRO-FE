@@ -10,3 +10,13 @@ export const getAll = async (item) => {
         return [];
     }
 }
+
+export const getById = async (id) => {
+    try {
+        const temp = await axiosPublic.get(`rooms/${id}`);
+        return temp?.data?.data;
+    } catch (e) {
+        console.log(e)
+        return null;
+    }
+}
