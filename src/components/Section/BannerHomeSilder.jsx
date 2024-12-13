@@ -100,7 +100,7 @@ const BannerHomeSilder = () => {
     try {
       data.province_id = selectedProvince?.code || "";
       data.district_id = selectedDistrict?.code || "";
-      const response = await RoomService.getAll(data)
+      const response = await RoomService.getAllSearch(data)
       console.log(response);
       navigate("/rooms", { state: response });
     } catch (error) {
