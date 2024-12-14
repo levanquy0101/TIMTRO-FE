@@ -1,23 +1,18 @@
 
 import MyAccountPage from "../pages/Account/MyAccountPage";
 import HomePage from "../pages/Home/HomePage";
-import LoginPage from "../pages/Login/LoginPage";
 import PostPage from "../pages/Post/PostPage";
 import RoomDetailPage from "../pages/Room/RoomDetailPage";
 import RoomPage from "../pages/Room/RoomPage";
 import CleaningServicePage from "../pages/Service/CleaningServicePage";
-import UtilitiesPage from "../pages/Utils/UtilitiesPage";
-import AboutPage from "../pages/About/AboutPage";
+import RepairServicePage from "../pages/Service/RepairServicePage";
+import TransferServicePage from "../pages/Service/TransferServicePage";
 
 export const homeRoutes = [
   {
     path: '/',
     component: <HomePage />,
     exact: true,
-  },
-  {
-    path: '/login',
-    component: <LoginPage />,
   },
   {
     path: '/rooms',
@@ -32,15 +27,15 @@ export const homeRoutes = [
     component: <PostPage />,
   },
   {
-    path: '/about',
-    component: <AboutPage />,
+    path: '/repair-service',
+    component: <RepairServicePage />,
   },
   {
-    path: '/utils',
-    component: <UtilitiesPage />,
+    path: '/transfer-service',
+    component: <TransferServicePage />,
   },
   {
-    path: '/service-clean',
+    path: '/clean-service',
     component: <CleaningServicePage />,
   },
   {

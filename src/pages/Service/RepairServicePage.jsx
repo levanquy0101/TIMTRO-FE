@@ -1,6 +1,6 @@
-import { packages, reasons, steps } from "../../data";
+import { services, steps } from "../../data";
 
-function UtilitiesPage(props) {
+function RepairServicePage(props) {
   return (
     <div>
       <main>
@@ -15,7 +15,8 @@ function UtilitiesPage(props) {
             style={{ transform: "translate(-50%,-50%)" }}
           >
             <h2 className="text-7xl md:text-6xl uppercase  text-white text-shadow w-full leading-snug text-center ">
-              DỊCH VỤ CHUYỂN TRỌ CHUYÊN NGHIỆP
+              DỊCH VỤ SỮA CHỮA <br />
+              24/7
             </h2>
 
             <button className="w-max px-7 p-1 bg-[#4561ec] border-2 border-[#4561ec] text-white text-2xl rounded-lg cursor-pointer hover:bg-white hover:text-[#4561ec]">
@@ -23,45 +24,39 @@ function UtilitiesPage(props) {
             </button>
           </div>
         </div>
-        <div className="mb-16 mt-10 px-32">
+        <div className="max-w-7xl mx-auto px-4 py-16">
           <h2 className="text-4xl font-bold text-center text-blue-600 mb-8">
-            Tại sao lại chọn chúng tôi?
+            Các gói dịch vụ sửa chữa.
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reasons.map((reason, index) => (
-              <div key={index} className="p-6 bg-gray-400 rounded-lg">
-                <h3 className="font-bold mb-2 text-center">{reason.title}</h3>
-                <p className="text-sm text-gray-600 text-center">
-                  {reason.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        ;
-        <div className="mb-16">
-          <h2 className="text-4xl font-bold text-center text-blue-600 mb-8">
-            Lựa chọn gói dịch vụ
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gray-300 px-32 py-10">
-            {packages.map((pkg, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, index) => (
               <div
                 key={index}
-                className="p-6 border rounded-lg text-center bg-white"
+                className="bg-white rounded-lg shadow-lg overflow-hidden pb-4"
               >
-                <h3 className="font-bold mb-4">{pkg.name}</h3>
-                <p className="text-sm mb-4">{pkg.description}</p>
-                <p className="text-xl font-bold text-blue-600 mb-4">
-                  {pkg.price}
-                </p>
-                <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 cursor-pointer border-0">
-                  Chọn Gói
-                </button>
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-48 object-cover"
+                />
+
+                <div className="p-4">
+                  <h3 className="font-bold text-lg mb-2">{service.title}</h3>
+                  <p className="text-lg text-gray-600 text-center">
+                    {service.desc}
+                  </p>
+
+                  <p className="text-2xl font-bold text-center py-2">
+                    {service.price}
+                  </p>
+                  <button className="mt-4 w-max text-sm bg-blue-500 text-white py-2 rounded-md border-2 border-transparent  px-6 float-right cursor-pointer hover:bg-white hover:text-blue-500 hover:border-solid hover:border-2 hover:border-blue-500">
+                    Đặt Lịch
+                  </button>
+                </div>
               </div>
             ))}
           </div>
         </div>
-        ;
         <div className="mb-16 px-32 ">
           <h2 className="text-4xl font-bold text-center text-blue-600 mb-8">
             Quy trình làm việc.
@@ -80,10 +75,9 @@ function UtilitiesPage(props) {
             ))}
           </div>
         </div>
-        ;
       </main>
     </div>
   );
 }
 
-export default UtilitiesPage;
+export default RepairServicePage;
