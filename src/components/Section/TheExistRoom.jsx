@@ -39,6 +39,7 @@ const TheExistRoom = () => {
             });
         }
     };
+    console.log(rooms)
     return (
         <Element name='the-exist-room'>
             <section id="topElement" className='mt-36'>

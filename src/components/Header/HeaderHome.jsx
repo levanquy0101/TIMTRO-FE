@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter, useLocation } from "react-router-dom";
 import ModalMenuSign from "../Modal/ModalMenuSign";
 import { Link } from "react-scroll";
 
 const HeaderHome = () => {
   const [isModalSign, setIsModalSign] = useState(false);
   const [typeModalSign, setTypeModalSign] = useState(0);
+  
+  const location = useLocation(); // Lấy location hiện tại
 
   const handleRegister = () => {
     setIsModalSign(true);
     setTypeModalSign(1);
   };
+  
   const handleLogin = () => {
     setIsModalSign(true);
     setTypeModalSign(2);
   };
+  
   const handleReset = () => {
     setIsModalSign(false);
     setTypeModalSign(0);
@@ -30,8 +34,8 @@ const HeaderHome = () => {
             </h1>
           </LinkRouter>
           <ul className="flex gap-8 items-center">
-            {
-              location.pathname === '/' &&
+            {/* Chỉ hiển thị các Link khi đang ở trang chủ */}
+            {location.pathname === '/' && (
               <>
                 <li>
                   <Link to="home" smooth={true} offset={-86} className="cursor-pointer">Trang Chủ</Link>
@@ -49,7 +53,7 @@ const HeaderHome = () => {
                   <Link to="about-us" smooth={true} className="cursor-pointer">Về Chúng Tôi</Link>
                 </li>
               </>
-            }
+            )}
 
             <li className="rounded-md border border-primary border-solid px-2 py-1.5 text-primary">
               <button

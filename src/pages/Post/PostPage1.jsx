@@ -1,5 +1,5 @@
 
-function PostPage(props) {
+export default function PostPage1(props) {
     return (
         <>
             <div className="relative">
@@ -26,4 +26,3 @@ function PostPage(props) {
     );
 }
 
-export default PostPage;
