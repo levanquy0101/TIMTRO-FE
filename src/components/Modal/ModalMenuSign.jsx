@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { UserService } from '../../services/api';
+import { AuthService, UserService } from '../../services/api';
 
 const ModalMenuSign = ({ isOpen, typeModal, onClose }) => {
     const { register: registerForm1, handleSubmit: handleSubmitForm1, formState: { errors: errorsForm1 } } = useForm();
@@ -22,8 +22,13 @@ const ModalMenuSign = ({ isOpen, typeModal, onClose }) => {
     };
 
     // Xử lý submit form 2
-    const onSubmitForm2 = (data) => {
+    const onSubmitForm2 = async (data) => {
         console.log("Form 2 Data:", data);
+        try {
+            await AuthService.login(data)
+        } catch (error) {
+            console.log(error)
+        }
     };
 
     if (!isOpen) return null;
@@ -38,19 +43,19 @@ const ModalMenuSign = ({ isOpen, typeModal, onClose }) => {
                         <form onSubmit={handleSubmitForm1(onSubmitForm1)} className='flex flex-col gap-4'>
                             <label htmlFor="" >
                                 <input {...registerForm1("name", { required: "Trường là bắt buộc!" })} className='w-full p-3 rounded-md border-zinc-400 border outline-none' type="text" placeholder='Tên' />
-                                { errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.name?.message}</small>}
+                                {errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.name?.message}</small>}
                             </label>
                             <label htmlFor="">
                                 <input {...registerForm1("email", { required: "Trường là bắt buộc!" })} className='w-full p-3 rounded-md border-zinc-400 border outline-none' type="text" placeholder='Email' />
-                                { errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.email?.message}</small>}
+                                {errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.email?.message}</small>}
                             </label>
                             <label htmlFor="">
                                 <input {...registerForm1("password", { required: "Trường là bắt buộc!" })} className='w-full p-3 rounded-md border-zinc-400 border outline-none' type="text" placeholder='Mật Khẩu' />
-                                { errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.password?.message}</small>}
+                                {errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.password?.message}</small>}
                             </label>
                             <label htmlFor="">
                                 <input {...registerForm1("password_confirmation", { required: "Trường là bắt buộc!" })} className='w-full p-3 rounded-md border-zinc-400 border outline-none' type="text" placeholder='Xác Nhận Mật Khẩu' />
-                                { errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.password_confirmation?.message}</small>}
+                                {errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.password_confirmation?.message}</small>}
                             </label>
                             <div className='flex gap-4 text-zinc-600'>
                                 <span>Vai trò</span>
@@ -63,7 +68,7 @@ const ModalMenuSign = ({ isOpen, typeModal, onClose }) => {
                                     Chủ trọ
                                 </label>
                             </div>
-                                { errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.role?.message}</small>}
+                            {errorsForm1 && <small className='text-red-500 block mt-2'>{errorsForm1?.role?.message}</small>}
                             <button className='cursor-pointer p-2.5 bg-primary text-white rounded-md border-none font-bold text-base'>Đăng ký</button>
                         </form>
                         <p className='text-center my-8'>Bạn đã có tài khoản? <strong className='text-primary cursor-pointer' onClick={() => setTypeModalSign(2)}>Đăng nhập ngay.</strong> </p>
@@ -72,12 +77,14 @@ const ModalMenuSign = ({ isOpen, typeModal, onClose }) => {
                 {typeModalSign == 2 &&
                     <div className='bg-white p-8 rounded-lg'>
                         <h2 className='text-center mb-8 font-normal text-zinc-500'>Đăng nhập</h2>
-                        <form action="" className='flex flex-col gap-4'>
+                        <form onSubmit={handleSubmitForm2(onSubmitForm2)} className='flex flex-col gap-4'>
                             <label htmlFor="">
-                                <input className='w-full p-3 rounded-md border-zinc-400 border outline-none' type="text" placeholder='Tên đăng nhập' />
+                                <input {...registerForm2("email", { required: "Trường là bắt buộc!" })} className='w-full p-3 rounded-md border-zinc-400 border outline-none' type="text" placeholder='Email' />
+                                {errorsForm2 && <small className='text-red-500 block mt-2'>{errorsForm2?.email?.message}</small>}
                             </label>
                             <label htmlFor="">
-                                <input className='w-full p-3 rounded-md border-zinc-400 border outline-none' type="text" placeholder='Mật Khẩu' />
+                                <input {...registerForm2("password", { required: "Trường là bắt buộc!" })} className='w-full p-3 rounded-md border-zinc-400 border outline-none' type="text" placeholder='Mật Khẩu' />
+                                {errorsForm2 && <small className='text-red-500 block mt-2'>{errorsForm2?.password?.message}</small>}
                             </label>
                             <button className='p-2.5 bg-primary text-white rounded-md border-none font-bold text-base'>Đăng nhập</button>
                         </form>
