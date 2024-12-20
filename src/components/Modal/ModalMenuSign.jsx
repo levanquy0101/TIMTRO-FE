@@ -25,7 +25,12 @@ const ModalMenuSign = ({ isOpen, typeModal, onClose }) => {
     const onSubmitForm2 = async (data) => {
         console.log("Form 2 Data:", data);
         try {
-            await AuthService.login(data)
+            const response = await AuthService.login(data)
+            const authData = {
+                user: response.user,
+                token: response.token,
+            };
+            localStorage.setItem('authData', JSON.stringify(authData));
         } catch (error) {
             console.log(error)
         }

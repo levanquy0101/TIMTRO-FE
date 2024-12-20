@@ -5,7 +5,7 @@ function MyAccount(props) {
     const [positionNum, setPositionNum] = useState(1);
 
     return (
-        <section className='border-0 border-t border-solid border-zinc-400 flex'>
+        <section className='border-0 border-t border-solid border-zinc-400 flex ' style={{ minHeight: 'calc(100svh - 2.35rem)' }}>
             <aside className='bg-zinc-100 max-w-96 border-0 border-r border-solid border-zinc-400'>
                 <div className='border-0 border-b border-solid border-zinc-400 text-center p-4'>
                     <FaUser size={32} color='blue' />
@@ -33,7 +33,7 @@ function MyAccount(props) {
                                 <input className='p-2 rounded border-zinc-400 w-1/3 outline-none' type="text" />
                             </label>
                             <label className='flex flex-col gap-2 my-2' htmlFor="">
-                                <span>Số điện thoại</span>
+                                <span>Địa chỉ</span>
                                 <input className='p-2 rounded border-zinc-400 w-1/3 outline-none' type="text" />
                             </label>
                         </form>
@@ -60,6 +60,13 @@ function MyAccount(props) {
                             <div className='flex gap-4'>
                                 <b>Ngày kết thúc hợp đồng:</b>
                                 <p className='text-zinc-600'>16/09/2024</p>
+                            </div>
+                            <div className='flex flex-col gap-4 bg-zinc-200 w-1/2 p-2 rounded'>
+                                <strong > Chi phí tháng 12</strong>
+                                <strong >Tiền điện</strong>
+                                <strong >Tiền nước</strong>
+                                <strong >Tiền phòng</strong>
+                                <strong >Tổng: </strong>
                             </div>
                         </div>
 
