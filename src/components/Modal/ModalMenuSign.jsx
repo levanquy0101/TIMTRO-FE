@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthService, UserService } from '../../services/api';
+import {toast} from "react-toastify";
+import { useAuth } from '../../hooks/useAuth';
 
 const ModalMenuSign = ({ isOpen, typeModal, onClose }) => {
-    const { register: registerForm1, handleSubmit: handleSubmitForm1, formState: { errors: errorsForm1 } } = useForm();
-    const { register: registerForm2, handleSubmit: handleSubmitForm2, formState: { errors: errorsForm2 } } = useForm();
+    const { login } = useAuth();
+    const { register: registerForm1, handleSubmit: handleSubmitForm1, formState: { errors: errorsForm1 }, reset: resetForm1 } = useForm();
+    const { register: registerForm2, handleSubmit: handleSubmitForm2, formState: { errors: errorsForm2 }, reset: resetForm2 } = useForm();    
 
     const [typeModalSign, setTypeModalSign] = useState(0);
     useEffect(() => {
@@ -16,6 +19,9 @@ const ModalMenuSign = ({ isOpen, typeModal, onClose }) => {
         console.log("Form 1 Data:", data);
         try {
             await UserService.register(data)
+            resetForm1()
+            onClose()
+            toast.success("Đăng ký thành công!")
         } catch (error) {
             console.log(error)
         }
@@ -31,6 +37,9 @@ const ModalMenuSign = ({ isOpen, typeModal, onClose }) => {
                 token: response.token,
             };
             localStorage.setItem('authData', JSON.stringify(authData));
+            resetForm2()
+            onClose()
+            login()
         } catch (error) {
             console.log(error)
         }
