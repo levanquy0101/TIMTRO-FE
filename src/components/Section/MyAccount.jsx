@@ -6,7 +6,17 @@ import { useNavigate } from 'react-router-dom';
 function MyAccount(props) {
     const [positionNum, setPositionNum] = useState(1);
     const { authData } = useAuth();
-    const navigate = useNavigate() 
+    const [isEditingName, setIsEditingName] = useState(false),
+        [isEditingEmail, setIsEditingEmail] = useState(false),
+        [isEditingPhone, setIsEditingPhone] = useState(false),
+        [isEditingDate, setIsEditingDate] = useState(false);
+
+    const [name, setName] = useState(authData?.user?.name),
+        [email, setEmail] = useState(authData?.user?.email),
+        [phone, setPhone] = useState(authData?.user?.phone),
+        [dateOfBirth, setDateOfBirth] = useState(authData?.user?.date_of_birth);
+
+    const navigate = useNavigate()
     useEffect(() => {
         if (!authData?.user) {
             navigate('/');
@@ -17,7 +27,7 @@ function MyAccount(props) {
             <aside className='bg-zinc-100 max-w-96 border-0 border-r border-solid border-zinc-400'>
                 <div className='border-0 border-b border-solid border-zinc-400 text-center p-4'>
                     <FaUser size={32} color='blue' />
-                    <h4 className='text-primary text-xl'>Phạm Tứ</h4>
+                    <h4 className='text-primary text-xl'>{authData?.user?.name}</h4>
                 </div>
                 <div className=''>
                     <h3 onClick={() => setPositionNum(1)} className='border-0 border-b border-solid font-normal hover:underline cursor-pointer py-3 px-6 border-zinc-400'>Thông tin tài khoản</h3>
@@ -30,21 +40,36 @@ function MyAccount(props) {
                     positionNum === 1 &&
                     <>
                         <h2 className='mb-8 text-zinc-600'>Thông tin</h2>
-                        <form action="">
-                            <b className='text-zinc-600'>Tên tài khoản</b>
-                            <div className='my-2 flex gap-2'><p>phamtrongtu</p><span className='text-primary'>Edit</span></div>
-                            <b className='text-zinc-600'>Mật khẩu</b>
-                            <div className='my-2 flex gap-2'><p>*************</p><span className='text-primary'>Edit</span></div>
+                        <form className='w-1/2'>
+                            <b className="text-zinc-600">Tên tài khoản</b>
+                            <div className="my-2 flex gap-2 items-center">
+                                {isEditingName ? <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="border p-2.5 rounded w-full outline-none" /> : <p className='w-full py-2'>{name}</p>}
+                                <span className="text-primary cursor-pointer" onClick={() => setIsEditingName(!isEditingName)}>{isEditingName ? 'Save' : 'Edit'}</span>
+                            </div>
 
-                            <label className='flex flex-col gap-2 my-2' htmlFor="">
-                                <span>Số điện thoại</span>
-                                <input className='p-2 rounded border-zinc-400 w-1/3 outline-none' type="text" />
-                            </label>
-                            <label className='flex flex-col gap-2 my-2' htmlFor="">
-                                <span>Địa chỉ</span>
-                                <input className='p-2 rounded border-zinc-400 w-1/3 outline-none' type="text" />
-                            </label>
+                            <b className="text-zinc-600">Email</b>
+                            <div className="my-2 flex gap-2 items-center">
+                                {isEditingEmail ? <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border p-2.5 rounded w-full outline-none" /> : <p className='w-full py-2'>{email}</p>}
+                                <span className="text-primary cursor-pointer" onClick={() => setIsEditingEmail(!isEditingEmail)}>{isEditingEmail ? 'Save' : 'Edit'}</span>
+                            </div>
+
+                            <b className="text-zinc-600">Số điện thoại</b>
+                            <div className="my-2 flex gap-2 items-center">
+                                {isEditingPhone ? <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="border p-2.5 rounded w-full outline-none" /> : <p className='w-full py-2'>{phone}</p>}
+                                <span className="text-primary cursor-pointer" onClick={() => setIsEditingPhone(!isEditingPhone)}>{isEditingPhone ? 'Save' : 'Edit'}</span>
+                            </div>
+
+                            <b className="text-zinc-600">Ngày sinh</b>
+                            <div className="my-2 flex gap-2 items-center">
+                                {isEditingDate ? <input type="date" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} className="border p-2.5 rounded w-full outline-none" /> : <p className='w-full py-2'>{dateOfBirth}</p>}
+                                <span className="text-primary cursor-pointer" onClick={() => setIsEditingDate(!isEditingDate)}>{isEditingDate ? 'Save' : 'Edit'}</span>
+                            </div>
+                            <b className="text-zinc-600">Vai trò</b>
+                            <div>
+                                <p className='py-2'>{authData?.user?.role}</p>
+                            </div>
                         </form>
+
                     </>
                 }
                 {

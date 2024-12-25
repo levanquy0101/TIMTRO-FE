@@ -21,7 +21,7 @@ const ImageSlider = ({ images }) => {
           className="flex transition-transform duration-500"
           style={{ transform: `translateX(-${currentIndex * 75}%)` }}
         >
-          {images.map((img, index) => (
+          {images?.map((img, index) => (
             <div key={index} className="min-w-[75%] flex-shrink-0 p-2.5">
               {/* Image frame */}
               <div className="relative w-full pb-[111.11%] overflow-hidden rounded-l">
