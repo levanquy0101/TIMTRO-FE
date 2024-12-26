@@ -26,7 +26,7 @@ const ImageSlider = ({ images }) => {
               {/* Image frame */}
               <div className="relative w-full pb-[111.11%] overflow-hidden rounded-l">
                 <img
-                  src={img}
+                  src={img?.image_url}
                   alt={`Slide ${index + 1}`}
                   className="absolute top-0 left-0 w-full h-full object-cover rounded-3xl border-2 border-solid border-white"
                 />

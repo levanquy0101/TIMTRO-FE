@@ -1,9 +1,19 @@
 import axiosPublic from "../../utils/axiosPublic";
 
 
-export const getAll = async (item) => {
+export const getAll = async () => {
     try {
         const temp = await axiosPublic.get(`rooms`);
+        return temp?.data;
+    } catch (e) {
+        console.log(e)
+        return [];
+    }
+}
+
+export const getAllByUser = async () => {
+    try {
+        const temp = await axiosPublic.get(`user/rooms`);
         return temp?.data;
     } catch (e) {
         console.log(e)

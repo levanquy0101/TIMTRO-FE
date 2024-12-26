@@ -133,7 +133,7 @@ const BannerHomeSilder = () => {
               quanh với nhiều dịch vụ tiện ích khác nhau có tầm nhìn ra biển và
               ánh sáng tự nhiên vào mỗi buổi sáng.
             </p>
-            <button className="bg-primary cursor-pointer text-white border-none px-8 py-2 rounded text-lg">
+            <button className="bg-primary cursor-pointer text-white border-none px-8 py-2 rounded text-lg" onClick={() => navigate(`/room/${firstRoom?.id}`)}>
               Thuê Ngay
             </button>
           </div>

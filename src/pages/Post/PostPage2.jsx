@@ -20,19 +20,19 @@ export default function PostPage2() {
                             <div className='grid grid-cols-2 gap-4'>
                                 <label className='block'>
                                     <input type='radio' className="hidden" />
-                                    <span className='p-2.5 cursor-pointer rounded-lg block bg-zinc-200'>Option 1</span>
+                                    <span className='p-2.5 cursor-pointer rounded-lg block bg-zinc-200'>1 phòng</span>
                                 </label>
                                 <label className='block'>
                                     <input type='radio' className="hidden" />
-                                    <span className='p-2.5 cursor-pointer rounded-lg block bg-zinc-200'>Option 2</span>
+                                    <span className='p-2.5 cursor-pointer rounded-lg block bg-zinc-200'>2 phòng</span>
                                 </label>
                                 <label className='block'>
                                     <input type='radio' className="hidden" />
-                                    <span className='p-2.5 cursor-pointer rounded-lg block bg-zinc-200'>Option 3</span>
+                                    <span className='p-2.5 cursor-pointer rounded-lg block bg-zinc-200'>3 phòng</span>
                                 </label>
                                 <label className='block'>
                                     <input type='radio' className="hidden" />
-                                    <span className='p-2.5 cursor-pointer rounded-lg block bg-zinc-200'>Option 4</span>
+                                    <span className='p-2.5 cursor-pointer rounded-lg block bg-zinc-200'>4 phòng</span>
                                 </label>
                             </div>
                         </div>
