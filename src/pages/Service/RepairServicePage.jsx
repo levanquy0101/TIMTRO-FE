@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 function RepairServicePage(props) {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isRoom, setIsRoom] = useState(true);
   const { data: services } = useQuery({
     queryKey: ['service-list'],
     queryFn: () => getAll(),
@@ -32,6 +33,10 @@ function RepairServicePage(props) {
     }
   };
 
+  const handleToggle = (event) => {
+    setIsRoom(event.target.checked);
+    reset()
+  };
 
   const handleOpenModal = (serviceId) => {
     setValue("service_id", serviceId);
@@ -126,20 +131,45 @@ function RepairServicePage(props) {
               type="hidden"
               {...register("service_id", { required: true })}
             />
-            <label >
-              <b className="text-sm">Chọn phòng</b>
-              <select
-                {...register("room_id")}
-                className="w-full p-2 border border-gray-300 rounded outline-none"
-              >
-                <option value="">-- Chọn phòng --</option>
-                {roomsMe?.map((room, index) => (
-                  <option key={index} value={room.id}>
-                    {room.name}
-                  </option>
-                ))}
-              </select>
+            <label className="cursor-pointer space-x-2">
+              <input
+                type="checkbox"
+                checked={isRoom}
+                onChange={handleToggle}
+              />
+              <span>Trạng thái: {isRoom ? "Có phòng" : "Địa chỉ khác"}</span>
             </label>
+            {
+              isRoom && (
+                <label >
+                  <b className="text-sm">Chọn phòng</b>
+                  <select
+                    {...register("room_id")}
+                    className="w-full p-2 border border-gray-300 rounded outline-none"
+                  >
+                    <option value="">-- Chọn phòng --</option>
+                    {roomsMe?.map((room, index) => (
+                      <option key={index} value={room?.room?.id}>
+                        {room?.room?.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )
+            }
+            {
+              !isRoom && (
+                <label >
+                  <b className="text-sm">Nhập địa chỉ khác</b>
+                  <input
+                    type="text"
+                    placeholder="Nhập địa chỉ khác"
+                    {...register("address_other")}
+                    className="w-full p-2 border border-gray-300 rounded outline-none"
+                  />
+                </label>
+              )
+            }
             <label >
               <b className="text-sm">Nhập mô tả</b>
               <input
