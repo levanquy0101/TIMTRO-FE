@@ -1,3 +1,4 @@
+import axiosAuth from "../../utils/axiosAuth";
 import axiosPublic from "../../utils/axiosPublic";
 
 
@@ -13,7 +14,7 @@ export const getAll = async () => {
 
 export const getAllByUser = async () => {
     try {
-        const temp = await axiosPublic.get(`user/rooms`);
+        const temp = await axiosAuth.get(`user/rooms`);
         return temp?.data;
     } catch (e) {
         console.log(e)
@@ -38,5 +39,14 @@ export const getById = async (id) => {
     } catch (e) {
         console.log(e)
         return null;
+    }
+}
+
+export const create = async (item) => {
+    try {
+        const temp = await axiosAuth.post(`/rooms`, item);
+        return temp?.data;
+    } catch (e) {
+        throw e;
     }
 }

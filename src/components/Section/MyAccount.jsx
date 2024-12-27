@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth';
 import { useQuery } from 'react-query';
 import { getAllByUser } from '../../services/api/RoomService';
+import ModalAddRoom from '../Modal/ModalAddRoom';
 
 
 export function AccountMe() {
@@ -102,6 +103,24 @@ export function RoomMe() {
         </>
     );
 }
+
+export function RentalRooms() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    return (
+        <div>
+            <div className='flex justify-between'>
+                <h1>Phòng cho thuê</h1>
+                <button className="bg-blue-500 border-none cursor-pointer hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded" onClick={() => setIsModalOpen(true)}>
+                    Thêm phòng
+                </button>
+            </div>
+            <ModalAddRoom isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </div>
+    )
+
+}
+
 
 // Hàm tính tổng chi phí
 function calculateTotal(room, rentalBill) {
