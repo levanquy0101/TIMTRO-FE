@@ -3,11 +3,9 @@ import { useAuth } from '../../hooks/useAuth';
 import { useQuery } from 'react-query';
 import { getAllByUser } from '../../services/api/RoomService';
 import ModalAddRoom from '../Modal/ModalAddRoom';
-import { useNavigate } from 'react-router-dom';
 
 
 export function AccountMe() {
-    const navigate = useNavigate()
     const { authData, logout } = useAuth();
     const [isEditingName, setIsEditingName] = useState(false),
         [isEditingEmail, setIsEditingEmail] = useState(false),
@@ -21,7 +19,7 @@ export function AccountMe() {
     
     const handleLogout = () => {
         logout();
-        navigate('/');
+        window.location.href = '/';
     }    
     return (
         <>
