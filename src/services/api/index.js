@@ -1,4 +1,5 @@
 export * as RoomService from './RoomService'
 export * as UserService from './UserService'
+export * as ServiceService from './ServiceService'
 export * as AuthService from './AuthService'
 export * as RentalManagementService from './RentalManagementService'

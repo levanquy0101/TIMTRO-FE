@@ -1,15 +1,25 @@
 import { useState } from "react";
-import { services, steps } from "../../data";
+import { steps } from "../../data";
 import ModalConfirm from "../../components/Modal/ModalConfirm";
+import { getAll } from "../../services/api/ServiceService";
+import { useQuery } from "react-query";
 
 function RepairServicePage(props) {
   const [isModalOpen, setModalOpen] = useState(false);
+  const { data: services } = useQuery({
+    queryKey: ['service-list'],
+    queryFn: () => getAll(),
+  });
+
+
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
   const handleConfirm = () => {
     console.log("Đã xác nhận!");
     setModalOpen(false);
   };
+  const repairServices = services?.filter(service => service.service_type === "repair");
+
 
   return (
     <div>
@@ -39,21 +49,21 @@ function RepairServicePage(props) {
             Các gói dịch vụ sửa chữa.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
+            {repairServices?.map((service, index) => (
               <div
                 key={index}
                 className="bg-white rounded-lg shadow-lg overflow-hidden pb-4"
               >
                 <img
-                  src={service.image}
-                  alt={service.title}
+                  src={service.image_url}
+                  alt={service.service_name}
                   className="w-full h-48 object-cover"
                 />
 
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-2">{service.title}</h3>
                   <p className="text-lg text-gray-600 text-center">
-                    {service.desc}
+                    {service.description}
                   </p>
 
                   <p className="text-2xl font-bold text-center py-2">

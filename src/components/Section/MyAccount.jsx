@@ -3,10 +3,12 @@ import { useAuth } from '../../hooks/useAuth';
 import { useQuery } from 'react-query';
 import { getAllByUser } from '../../services/api/RoomService';
 import ModalAddRoom from '../Modal/ModalAddRoom';
+import { useNavigate } from 'react-router-dom';
 
 
 export function AccountMe() {
-    const { authData } = useAuth();
+    const navigate = useNavigate()
+    const { authData, logout } = useAuth();
     const [isEditingName, setIsEditingName] = useState(false),
         [isEditingEmail, setIsEditingEmail] = useState(false),
         [isEditingPhone, setIsEditingPhone] = useState(false),
@@ -16,6 +18,11 @@ export function AccountMe() {
         [email, setEmail] = useState(authData?.user?.email),
         [phone, setPhone] = useState(authData?.user?.phone),
         [dateOfBirth, setDateOfBirth] = useState(authData?.user?.date_of_birth);
+    
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    }    
     return (
         <>
             <h2 className='mb-8 text-zinc-600'>Thông tin</h2>
@@ -48,6 +55,7 @@ export function AccountMe() {
                     <p className='py-2'>{authData?.user?.role}</p>
                 </div>
             </form>
+            <button onClick={handleLogout} className='p-2 bg-primary rounded border-none text-white cursor-pointer'>Đăng xuất</button>
         </>
     )
 }

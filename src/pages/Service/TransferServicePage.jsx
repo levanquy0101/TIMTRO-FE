@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { packages, reasons, steps } from "../../data";
 import ModalConfirm from "../../components/Modal/ModalConfirm";
+import { useQuery } from "react-query";
+import { getAll } from "../../services/api/ServiceService";
 
 function TransferServicePage(props) {
-    const [isModalOpen, setModalOpen] = useState(false);
-    const handleOpenModal = () => setModalOpen(true);
-    const handleCloseModal = () => setModalOpen(false);
-    const handleConfirm = () => {
-      console.log("Đã xác nhận!");
-      setModalOpen(false);
-    };
+  const [isModalOpen, setModalOpen] = useState(false);
+  const { data: services } = useQuery({
+    queryKey: ['service-list'],
+    queryFn: () => getAll(),
+  });
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+  const handleConfirm = () => {
+    console.log("Đã xác nhận!");
+    setModalOpen(false);
+  };
+  const transferServices = services?.filter(service => service.service_type === "moving");
   return (
     <div>
       <main>
@@ -53,7 +60,7 @@ function TransferServicePage(props) {
             Lựa chọn gói dịch vụ
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gray-300 px-32 py-10">
-            {packages.map((pkg, index) => (
+            {transferServices?.map((pkg, index) => (
               <div
                 key={index}
                 className="p-6 border rounded-lg text-center bg-white"

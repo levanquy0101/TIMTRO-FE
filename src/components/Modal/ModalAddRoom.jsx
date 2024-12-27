@@ -25,10 +25,15 @@ export default function ModalAddRoom({ isOpen, onClose }) {
 
     const onSubmit = async (data) => {
         try{
-            data.province_id = selectedProvince?.code || "";
-            data.district_id = selectedDistrict?.code || "";
-            data.images = data.images[0] || null;
-            await RoomService.create(data);
+            const imageFiles = Array.from(data.images);
+            const formData = {
+                ...data,
+                images: imageFiles, // Gắn mảng ảnh vào
+                province_id: selectedProvince?.code || "",
+                district_id: selectedDistrict?.code || "",
+            };
+            console.log(formData);
+            await RoomService.create(formData); 
             reset();
             setSelectedProvince(null);
             setSelectedDistrict(null);
