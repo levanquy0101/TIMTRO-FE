@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth';
 import { useQuery } from 'react-query';
-import { getAllByUser } from '../../services/api/RoomService';
+import { getAllByLandlord, getAllByUser } from '../../services/api/RoomService';
 import ModalAddRoom from '../Modal/ModalAddRoom';
+import RoomCard from '../../ui/RoomCard';
 
 
 export function AccountMe() {
@@ -16,11 +17,11 @@ export function AccountMe() {
         [email, setEmail] = useState(authData?.user?.email),
         [phone, setPhone] = useState(authData?.user?.phone),
         [dateOfBirth, setDateOfBirth] = useState(authData?.user?.date_of_birth);
-    
+
     const handleLogout = () => {
         logout();
         window.location.href = '/';
-    }    
+    }
     return (
         <>
             <h2 className='mb-8 text-zinc-600'>Thông tin</h2>
@@ -112,14 +113,33 @@ export function RoomMe() {
 
 export function RentalRooms() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { data: roomsLandlord } = useQuery({
+        queryKey: ['roomsLandlord'],
+        queryFn: () => getAllByLandlord(),
+    });
 
     return (
         <div>
             <div className='flex justify-between'>
                 <h1>Phòng cho thuê</h1>
-                <button className="bg-blue-500 border-none cursor-pointer hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded" onClick={() => setIsModalOpen(true)}>
+                <button className="bg-primary border-none cursor-pointer hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded" onClick={() => setIsModalOpen(true)}>
                     Thêm phòng
                 </button>
+            </div>
+            <div className='grid grid-cols-3 gap-8 my-8'>
+                {
+                    roomsLandlord?.map((room, index) => (
+                        <RoomCard 
+                        key={index} 
+                        name={room?.name} 
+                        link={`/room/${room?.id}`} 
+                        image={room?.images[0]?.image_url} 
+                        address={room?.address} 
+                        price={room?.price}
+                        tenant={room?.rental_management[0]?.tenant?.name}
+                        />
+                    ))
+                }
             </div>
             <ModalAddRoom isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
