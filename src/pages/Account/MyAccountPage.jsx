@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaUser } from "react-icons/fa";
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { RoomMe, AccountMe, RentalRooms } from '../../components/Section/MyAccount';
+import { RoomMe, AccountMe, RentalRooms, RentalManagement } from '../../components/Section/MyAccount';
 
 function MyAccountPage(props) {
     const [searchParams] = useSearchParams();
@@ -55,6 +55,17 @@ function MyAccountPage(props) {
                             </h3>
                         )
                     }
+                    {
+                        authData?.user?.role === "landlord" && (
+                            <h3
+                                onClick={() => navigate("?position=4")}
+                                className={`border-0 border-b border-solid font-normal hover:underline cursor-pointer py-3 px-6 border-zinc-400 ${positionNum === 4 ? "underline" : ""
+                                    }`}
+                            >
+                                Quản lý cho thuê
+                            </h3>
+                        )
+                    }
                 </div>
 
             </aside>
@@ -62,6 +73,7 @@ function MyAccountPage(props) {
                 {positionNum === 1 && <AccountMe />}
                 {positionNum === 2 && <RoomMe />}
                 {positionNum === 3 && authData?.user?.role === "landlord" && <RentalRooms />}
+                {positionNum === 4 && authData?.user?.role === "landlord" && <RentalManagement />}
             </div>
         </section>
     );
