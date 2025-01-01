@@ -5,8 +5,10 @@ import { getAllByLandlord, getAllByUser } from '../../services/api/RoomService';
 import ModalAddRoom from '../Modal/ModalAddRoom';
 import RoomCard from '../../ui/RoomCard';
 import moment from 'moment';
-import { getAll } from '../../services/api/BillService';
+import { getAll as getAllBill } from '../../services/api/BillService';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { TaskCard } from '../../ui/TaskCard';
+import { getAll as getAllServiceRequest } from '../../services/api/ServiceRequestService';
 
 
 export function AccountMe() {
@@ -207,7 +209,7 @@ export function BillManagement() {
   const roomId = searchParams.get('roomId');
   const { data: billLandlords } = useQuery({
     queryKey: ["bill-landlords"],
-    queryFn: () => getAll(roomId),
+    queryFn: () => getAllBill(roomId),
   });
   const getStatusColor = (status) => {
     switch (status) {
@@ -272,6 +274,32 @@ export function BillManagement() {
             ))}
         </div>
       </div>
+    </div>
+  )
+}
+
+export function TaskList() {
+  const { data: tasks } = useQuery({
+    queryKey: ['tasks'],
+    queryFn: () => getAllServiceRequest,
+  })
+
+  return (
+    <div className="grid grid-cols-4 gap-4">
+      {tasks?.map((task, index) => (
+        <TaskCard
+          key={index}
+          taskId={task?.id}
+          room={task?.room}
+          service={task?.service}
+          address={task?.address}
+          movingFrom={task?.moving_from}
+          movingTo={task?.moving_to}
+          requestDate={task?.request_date}
+          user={task?.user}
+          status={task?.status}
+        />
+      ))}
     </div>
   )
 }
