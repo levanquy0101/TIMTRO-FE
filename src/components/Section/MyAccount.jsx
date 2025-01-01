@@ -9,6 +9,10 @@ import { getAll as getAllBill } from '../../services/api/BillService';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TaskCard } from '../../ui/TaskCard';
 import { getAll as getAllServiceRequest } from '../../services/api/ServiceRequestService';
+import ModalConfirm from '../Modal/ModalConfirm';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { BillService } from '../../services/api';
 
 
 export function AccountMe() {
@@ -204,6 +208,7 @@ export function RentalManagement() {
 
 
 export function BillManagement() {
+  const [isModal, setIsModal] = useState(false);
   const location = useLocation(); // Lấy thông tin URL hiện tại
   const searchParams = new URLSearchParams(location.search); // Phân tích query string
   const roomId = searchParams.get('roomId');
@@ -211,6 +216,23 @@ export function BillManagement() {
     queryKey: ["bill-landlords"],
     queryFn: () => getAllBill(roomId),
   });
+  const { data: roomsLandlord = [] } = useQuery({
+    queryKey: ['roomsLandlord'],
+    queryFn: () => getAllByLandlord(),
+  });
+  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      await BillService.create(data);
+      reset()
+      toast.success("Thêm hóa đơn thành công");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getStatusColor = (status) => {
     switch (status) {
       case "paid":
@@ -231,14 +253,14 @@ export function BillManagement() {
         return "Chưa có hóa đơn";
     }
   };
-  if (!billLandlords) return null;
+  // if (!billLandlords) return null;
 
   return (
     <div className="max-w-6xl mx-auto">
       <div className="bg-white shadow rounded-lg p-6 mb-6">
         <div className='flex justify-between items-center'>
           <h3 className="text-lg font-semibold text-zinc-600">{`Hóa đơn thanh toán phòng: ${billLandlords?.room?.name}`}</h3>
-          <button className="bg-primary cursor-pointer font-bold text-white rounded-lg px-4 py-2.5 mt-4 border-none">Thêm hóa đơn</button>
+          <button onClick={() => setIsModal(true)} className="bg-primary cursor-pointer font-bold text-white rounded-lg px-4 py-2.5 mt-4 border-none">Thêm hóa đơn</button>
 
         </div>
         <div className="mt-4 space-y-3">
@@ -273,6 +295,61 @@ export function BillManagement() {
               </div>
             ))}
         </div>
+        <ModalConfirm isOpen={isModal} onClose={() => setIsModal(false)} title={"Hóa đơn"} children={<>
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid grid-cols-1 gap-4">
+            <label >
+              <b className="text-sm">Chọn phòng đã thuê</b>
+              <select
+                {...register("rental_id")}
+                className="w-full p-2 border border-gray-300 rounded outline-none"
+              >
+                <option value="">-- Chọn phòng đã thuê --</option>
+                {roomsLandlord?.map((room, index) => (
+                  <option key={index} value={room?.id}>
+                    {room?.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label >
+              <b className="text-sm">Ngày bắt đầu</b>
+              <input
+                type="date"
+                placeholder="Ngày bắt đầu"
+                {...register("start_date")}
+                className="w-full p-2 border border-gray-300 rounded outline-none"
+              />
+            </label>
+            <label >
+              <b className="text-sm">Ngày kết thúc</b>
+              <input
+                type="date"
+                placeholder="Ngày kết thúc"
+                {...register("end_date")}
+                className="w-full p-2 border border-gray-300 rounded outline-none"
+              />
+            </label>
+            <label >
+              <b className="text-sm">Số điện sử dụng</b>
+              <input
+                type="number"
+                placeholder="Số điện sử dụng"
+                {...register("electricity_usage")}
+                className="w-full p-2 border border-gray-300 rounded outline-none"
+              />
+            </label>
+            <label >
+              <b className="text-sm">Số nước sử dụng</b>
+              <input
+                type="number"
+                placeholder="Số nước sử dụng"
+                {...register("water_usage")}
+                className="w-full p-2 border border-gray-300 rounded outline-none"
+              />
+            </label>
+            <button type="submit" className="p-2.5 bg-primary border-none text-white rounded cursor-pointer font-bold">Thêm hóa đơn</button>
+          </form>
+        </>} />
       </div>
     </div>
   )
