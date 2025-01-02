@@ -19,3 +19,13 @@ export const getAll = async () => {
         return [];
     }
 }
+
+export const updateConfirm = async (id) => {
+    try {
+        const temp = await axiosAuth.put(`/service-requests/${id}/confirm`);
+        return temp?.data;
+    } catch (e) {
+        console.log(e)
+        throw e;
+    }
+}

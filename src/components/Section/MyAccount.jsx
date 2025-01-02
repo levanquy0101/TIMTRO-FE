@@ -12,7 +12,7 @@ import { getAll as getAllServiceRequest } from '../../services/api/ServiceReques
 import ModalConfirm from '../Modal/ModalConfirm';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { BillService } from '../../services/api';
+import { BillService, ServiceRequestService } from '../../services/api';
 
 
 export function AccountMe() {
@@ -356,11 +356,20 @@ export function BillManagement() {
 }
 
 export function TaskList() {
-  const { data: tasks } = useQuery({
+  const { data: tasks, refetch } = useQuery({
     queryKey: ['tasks'],
     queryFn: () => getAllServiceRequest,
   })
+  const handleConfirm = async (id) => {
+    try {
+      const res = await ServiceRequestService.updateConfirm(id);
+      console.log(res);
+      refetch();
 
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="grid grid-cols-4 gap-4">
       {tasks?.map((task, index) => (
@@ -375,6 +384,9 @@ export function TaskList() {
           requestDate={task?.request_date}
           user={task?.user}
           status={task?.status}
+          children={<>
+            <button onClick={() => handleConfirm(task?.id)} className='border-none p-2 rounded bg-zinc-100 text-black'>Tiến hành làm</button>
+          </>}
         />
       ))}
     </div>
