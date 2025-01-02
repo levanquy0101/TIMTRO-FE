@@ -12,7 +12,9 @@ import { getAll as getAllServiceRequest } from '../../services/api/ServiceReques
 import ModalConfirm from '../Modal/ModalConfirm';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { BillService, ServiceRequestService } from '../../services/api';
+import { BillService, RentalManagementService, ServiceRequestService } from '../../services/api';
+import { CiEdit } from "react-icons/ci";
+
 
 
 export function AccountMe() {
@@ -160,10 +162,35 @@ export function RentalRooms() {
 
 export function RentalManagement() {
   const navigate = useNavigate()
+  const [itemUpdate, setItemUpdate] = useState(null);
+  const [isModal, setIsModal] = useState(false);
   const { data: roomsLandlord = [] } = useQuery({
     queryKey: ['roomsLandlord'],
     queryFn: () => getAllByLandlord(),
   });
+
+
+  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      await RentalManagementService.update(itemUpdate?.id, data);
+      reset()
+      toast.success("Sửa hợp đồng thành công");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleItemUpdate = (item) => {
+    setIsModal(true);
+    setItemUpdate(item);
+    setValue('rental_price', item.price);
+    setValue('start_date', item?.rental_management[0]?.start_date);
+    setValue('end_date', item?.rental_management[0]?.end_date);
+    setValue('status', item.status);
+  }
 
   const formatCurrency = (value) => {
     return value
@@ -184,8 +211,9 @@ export function RentalManagement() {
       <h1>Quản lý cho thuê</h1>
       <div className="flex flex-col gap-4 mt-4">
         {filteredRooms?.map((room, index) => (
-          <div key={index}>
+          <div key={index} className='relative'>
             <h3 className="font-normal">Phòng: {room.name || `Phòng ${index + 1}`}</h3>
+            <button className='absolute top-4 right-4' onClick={() => handleItemUpdate(room)}><CiEdit /></button>
             <div className="w-1/2 border-2 border-solid border-zinc-400 p-4 rounded">
               <div className="grid grid-cols-2 gap-4">
                 <p>Giá: <span>{formatCurrency(room.price)}</span></p>
@@ -201,6 +229,52 @@ export function RentalManagement() {
           </div>
         ))}
       </div>
+      <ModalConfirm isOpen={isModal} onClose={() => setIsModal(false)} title={"Hóa đơn"} children={<>
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid grid-cols-1 gap-4">
+          <label >
+            <b className="text-sm">Giá</b>
+            <input
+              type="date"
+              placeholder="Giá"
+              {...register("rental_price")}
+              className="w-full p-2 border border-gray-300 rounded outline-none"
+            />
+          </label>
+          <label >
+            <b className="text-sm">Ngày bắt đầu</b>
+            <input
+              type="date"
+              placeholder="Ngày bắt đầu"
+              {...register("start_date")}
+              className="w-full p-2 border border-gray-300 rounded outline-none"
+            />
+          </label>
+          <label >
+            <b className="text-sm">Ngày kết thúc</b>
+            <input
+              type="date"
+              placeholder="Ngày kết thúc"
+              {...register("end_date")}
+              className="w-full p-2 border border-gray-300 rounded outline-none"
+            />
+          </label>
+          <label >
+            <b className="text-sm">Số điện sử dụng</b>
+            <select
+              {...register("status")}
+              className="w-full p-2 border border-gray-300 rounded outline-none"
+            >
+              <option value="">-- Chọn phòng đã thuê --</option>
+              {roomsLandlord?.map((room, index) => (
+                <option key={index} value={room?.id}>
+                  {room?.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button type="submit" className="p-2.5 bg-primary border-none text-white rounded cursor-pointer font-bold">Thêm hóa đơn</button>
+        </form>
+      </>} />
     </div>
   );
 }
