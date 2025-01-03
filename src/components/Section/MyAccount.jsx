@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { BillService, RentalManagementService, ServiceRequestService } from '../../services/api';
 import { CiEdit } from "react-icons/ci";
+import { RENTAL_MANAGERMENT } from '../../common';
 
 
 
@@ -169,7 +170,6 @@ export function RentalManagement() {
     queryFn: () => getAllByLandlord(),
   });
 
-
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
@@ -189,7 +189,7 @@ export function RentalManagement() {
     setValue('rental_price', item.price);
     setValue('start_date', item?.rental_management[0]?.start_date);
     setValue('end_date', item?.rental_management[0]?.end_date);
-    setValue('status', item.status);
+    setValue('status', item.rental_management[0]?.status);
   }
 
   const formatCurrency = (value) => {
@@ -213,7 +213,7 @@ export function RentalManagement() {
         {filteredRooms?.map((room, index) => (
           <div key={index} className='relative'>
             <h3 className="font-normal">Phòng: {room.name || `Phòng ${index + 1}`}</h3>
-            <button className='absolute top-4 right-4' onClick={() => handleItemUpdate(room)}><CiEdit /></button>
+            <button className='absolute top-4 right-4 flex p-0.5 cursor-pointer' onClick={() => handleItemUpdate(room)}><CiEdit /></button>
             <div className="w-1/2 border-2 border-solid border-zinc-400 p-4 rounded">
               <div className="grid grid-cols-2 gap-4">
                 <p>Giá: <span>{formatCurrency(room.price)}</span></p>
@@ -229,12 +229,11 @@ export function RentalManagement() {
           </div>
         ))}
       </div>
-      <ModalConfirm isOpen={isModal} onClose={() => setIsModal(false)} title={"Hóa đơn"} children={<>
+      <ModalConfirm isOpen={isModal} onClose={() => setIsModal(false)} title={"Sửa hợp đồng"} children={<>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid grid-cols-1 gap-4">
           <label >
             <b className="text-sm">Giá</b>
             <input
-              type="date"
               placeholder="Giá"
               {...register("rental_price")}
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -259,20 +258,20 @@ export function RentalManagement() {
             />
           </label>
           <label >
-            <b className="text-sm">Số điện sử dụng</b>
+            <b className="text-sm">Trạng thái</b>
             <select
               {...register("status")}
               className="w-full p-2 border border-gray-300 rounded outline-none"
             >
-              <option value="">-- Chọn phòng đã thuê --</option>
-              {roomsLandlord?.map((room, index) => (
-                <option key={index} value={room?.id}>
-                  {room?.name}
+              <option value="">-- Trạng thái --</option>
+              {RENTAL_MANAGERMENT?.map((item, index) => (
+                <option key={index} value={item?.value}>
+                  {item?.name}
                 </option>
               ))}
             </select>
           </label>
-          <button type="submit" className="p-2.5 bg-primary border-none text-white rounded cursor-pointer font-bold">Thêm hóa đơn</button>
+          <button type="submit" className="p-2.5 bg-primary border-none text-white rounded cursor-pointer font-bold">Lưu thay đổi</button>
         </form>
       </>} />
     </div>
